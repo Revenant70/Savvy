@@ -1,0 +1,25 @@
+# Savvy
+
+## Tech Stack
+
+- React
+- Spring
+- Postgres
+
+## Features and Scope
+
+## Backend
+
+1. User Authentication/Authorization/Access control system
+2. Chatting/real-time messaging
+
+- External Integrations?
+- Version control?
+
+## Frontend
+
+1. Rich Text Editing (draft.js)
+2. Real time editting
+3. Chatting/real-time messaging
+4. Page creation (For example a basic text file but embedded)
+5. Tags and labels/search capabilities? (might be cool but would be difficult so might be worth it)
