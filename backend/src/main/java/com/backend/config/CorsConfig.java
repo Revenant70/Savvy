@@ -18,7 +18,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/api/**")
-                        .allowedOrigins("https://jpm-be.me/**", "http://localhost:5174")
+                        .allowedOrigins("https://jpm-be.me/**", "http://localhost:5174", "http://localhost:8080")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("Authorization", "Content-Type");
             }
