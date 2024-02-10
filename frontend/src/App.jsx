@@ -7,7 +7,6 @@ function App() {
   return (
     <Routes>
         <Route path="*" element={<Navigate to="/auth" /> } />
-        <Route path="/"/>
         <Route path="/auth/signup" />
         <Route path="/profile/profilepage" />
       </Routes>

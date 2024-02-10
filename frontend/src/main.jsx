@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Auth from './components/Auth.jsx'
-import Body from './components/Body.jsx'
+import Chats from './components/Chats.jsx'
 import SignUp from './components/SignUp.jsx'
 import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Body from './components/Body.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/body",
-    element: <Body />,
+    element: <Body />
+  },
+  {
+    path: "/Chats",
+    element: <Chats />,
   },
   {
     path: '/auth',

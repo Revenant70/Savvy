@@ -10,9 +10,6 @@ export default function SignUp() {
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-
 
   const navigate = new useNavigate();
 
@@ -24,20 +21,16 @@ export default function SignUp() {
     e.preventDefault();
     try {
       const response = await axios.post(
-          `${backend_ip}/api/users/signup`,
+          `${backend_ip}/api/user/signup`,
           {
             username: username,
             password: password,
             email: email,
-            firstname: firstname,
-            lastname: lastname,
           }
       );
-      if (response.status === 200) {
-        // Check if the response data indicates success (you might customize this based on your API response)
+      if (response.status === 201) {
           navigate("/auth");
       } else {
-        // Handle unexpected status codes
         console.log("Unexpected response status:", response.status);
       }
     } catch (error) {
@@ -72,7 +65,7 @@ export default function SignUp() {
                 </label>
                 <input
                     type="text"
-                    placeholder="user name"
+                    placeholder="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="input input-bordered"
@@ -125,30 +118,6 @@ export default function SignUp() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered"
                   required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">First Name </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="first name"
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
-                  className="input input-bordered"
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Last Name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="last name"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
-                  className="input input-bordered"
                 />
               </div>
               <div className="form-control mt-6">

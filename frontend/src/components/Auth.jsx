@@ -12,7 +12,7 @@ export default function Auth() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${backend_ip}/api/users/login`,
+        `${backend_ip}/api/user/login`,
         {
           username: username,
           password: password,
@@ -46,14 +46,15 @@ export default function Auth() {
           <form className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Username</span>
               </label>
               <input
-                type="email"
-                placeholder="email"
+                type="text"
+                placeholder="username"
                 className="input input-bordered"
                 required
-                value={(e) => setUsername(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="form-control">
@@ -65,7 +66,8 @@ export default function Auth() {
                 placeholder="password"
                 className="input input-bordered"
                 required
-                value={(e) => setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="flex justify- align-bottom">
