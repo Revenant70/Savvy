@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Auth from './components/Auth.jsx'
-import Chats from './components/Chats.jsx'
 import SignUp from './components/SignUp.jsx'
 import './index.css'
 import {
@@ -20,10 +19,6 @@ const router = createBrowserRouter([
   {
     path: "/body",
     element: <Body />
-  },
-  {
-    path: "/Chats",
-    element: <Chats />,
   },
   {
     path: '/auth',

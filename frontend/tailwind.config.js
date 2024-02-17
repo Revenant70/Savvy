@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      light: {
+      colors: {
         background: "#141414",
         accent100: "#262626",
         accent200: "#3A3A3A",

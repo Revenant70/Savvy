@@ -1,48 +1,59 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ContactList from "./ContactList";
+import Messages from "./Messages";
 
 export default function Body() {
-  const [contacts, setContacts] = useState([]);
+  const [messages, setMessages] = useState([
+  { id: 1, text: "hiya", messageId: 1 },
+  { id: 1, text: "this is text", messageId: 2},
+  { id: 2, text: "Sup", messageId: 3}
+]);
+
+  const [contacts, setContacts] = useState([
+    { id: 1, fname: "John", lname: "Smith", profilePicture: "" },
+    { id: 2, fname: "Jane", lname: "Johnson", profilePicture: "" },
+    {
+      id: 3,
+      fname: "Alice",
+      lname: "Johnson",
+      profilePicture: "public/Professional-headshot.png",
+    },
+  ]);
+
   const [selectedContact, setSelectedContact] = useState("");
-  const [messages, setMessages] = useState([]);
 
-  // Function to load contacts
-  useEffect(() => {
-    // Fetch contacts from the backend and setContacts
-  }, []);
-
-  // Function to load messages for selected contact
-  useEffect(() => {
-    if (selectedContact) {
-      // Fetch messages for selectedContact from the backend and setMessages
-    }
-  }, [selectedContact]);
-
-  // Function to handle sending messages
-  const sendMessage = (message) => {
-    // Send message to the backend
-    // Update messages state
+  // Handle selecting a contact
+  const handleContactSelect = (contact) => {
+    setSelectedContact(contact);
   };
 
+  const filteredMessages = selectedContact
+    ? messages.filter((message) => message.id === selectedContact.id)
+    : [];
+
   return (
-    <div className="flex h-screen">
-      <div className="w-3/12 bg-gray-200 rounded-3xl p-4 m-6">
-        <ContactList contacts={contacts} onSelectContact={setSelectedContact} />
-      </div>
-      <div className="flex flex-col w-9/12 m-6">
-        <div className="bg-gray-200 rounded-full h-16 mx-6">
-          <div className="flex flex-row pl-4 ">
+    <div className="bg-background h-screen w-full p-8 flex flex-row">
+      <ContactList
+        contacts={contacts}
+        selectedContact={selectedContact}
+        onSelectContact={handleContactSelect}
+        messages={filteredMessages}
+      />
+      <div className="w-full flex flex-col justify-start items-center">
+        <div className="bg-accent100 w-11/12 h-16 max-h-16 rounded-full">
+          <div className="flex justify-start h-16 max-h-16 items-center ml-4">
             {selectedContact.profilePicture ? (
               <div className="h-16 flex items-center justify-center">
                 <img
                   className="object-cover w-12 h-12 rounded-full"
                   src={selectedContact.profilePicture}
+                  alt={`${selectedContact.fname}'s profile`}
                 />
               </div>
             ) : (
               <div className="h-16 flex items-center justify-center">
                 {selectedContact.fname && selectedContact.fname.length > 0 ? (
-                  <span className="object-cover w-12 h-12 rounded-full bg-slate-600 flex justify-center items-center">
+                  <span className="object-cover w-12 h-12 rounded-full bg-slate-600 flex justify-center items-center text-4xl">
                     {selectedContact.fname[0]}
                   </span>
                 ) : (
@@ -50,28 +61,13 @@ export default function Body() {
                 )}
               </div>
             )}
+            <div className=" ml-2">
+              {selectedContact.fname + " "}
+              {selectedContact.lname}
+            </div>
           </div>
         </div>
-        <div className="w-full p-4">
-          {selectedContact ? (
-            <div>
-              <h2>Chat with {selectedContact.name}</h2>
-              <ul>
-                {messages.map((message, index) => (
-                  <li key={index}>{message.text}</li>
-                ))}
-              </ul>
-              <input
-                type="text"
-                placeholder="Type a message..."
-                // Handle input change
-              />
-              <button onClick={() => sendMessage(message)}>Send</button>
-            </div>
-          ) : (
-            <p className="text-center">Select a contact to start chatting</p>
-          )}
-        </div>
+        <Messages messages={filteredMessages} />
       </div>
     </div>
   );
