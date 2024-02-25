@@ -6,6 +6,7 @@ export default function Body() {
   const [messages, setMessages] = useState([
   { id: 1, text: "hiya", messageId: 1 },
   { id: 1, text: "this is text", messageId: 2},
+  { id: 1, text: "How should I add another text to the thread? now this is a much longer text and I wanted to see how it worked with the text bubble. I assume it'll work well because well I believe I have setup the css correctly", messageId: 4},
   { id: 2, text: "Sup", messageId: 3}
 ]);
 

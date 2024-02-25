@@ -1,13 +1,7 @@
-export default function ContactList({ contacts, onSelectContact, messages }) {
+export default function ContactList({ contacts, onSelectContact }) {
   return (
     <div className="bg-accent100 h-full w-4/12 rounded-3xl shadow-lg text-6xl">
       {contacts.map((contact) => {
-        // Find messages for the current contact
-        const contactMessages = messages.filter((message) => message.id === contact.id);
-        
-        // Get the newest message for the current contact
-        const newestMessage = contactMessages.length > 0 ? contactMessages[contactMessages.length - 1] : null;
-
         return (
           <div key={contact.id}>
             <div

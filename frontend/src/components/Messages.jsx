@@ -1,22 +1,33 @@
+window.global ||= window
 import { useState } from "react";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+import backend_ip from "../../config/backend";
 
+var stompClient = null;
 export default function Messages({ messages, sendMessage }) {
   const [inputMessage, setInputMessage] = useState("");
 
+
   const handleSendMessage = () => {
-    if (inputMessage.trim() !== "") {
-      sendMessage(inputMessage);
-      setInputMessage("");
+    let jwt = localStorage.getItem("JWT");
+    let Sock = new SockJS(`${backend_ip}/ws`);
+    stompClient = Stomp.over(Sock);
+    let headers = {
+      Authorization: `Bearer ${jwt}`
     }
-    let jwt = localStorage.getItem("JWT")
-    console.log(jwt)
+    stompClient.connect(headers, onConnected);
   };
+
+  const onConnected = () => {
+    console.log("This actually works")
+  }
 
   return (
     <div className="mt-4 w-11/12 h-full flex flex-col justify-between">
       <div className="flex flex-col justify-center items-start p-4">
         {messages.map((message, index) => (
-          <div key={index} className="m-2 text-primary bg-accent100 max-w-72 h-8 p-4 rounded-2xl flex justify-start items-center">
+          <div key={index} className="m-2 text-primary bg-accent100 max-w-72 min-h-4 p-3 rounded-2xl flex justify-start items-center text-start">
             <div className="message-text">{message.text}</div>
           </div>
         ))}
